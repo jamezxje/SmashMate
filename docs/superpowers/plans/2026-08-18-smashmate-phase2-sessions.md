@@ -444,7 +444,7 @@ git commit -m "feat(schedule): implement RecurringSchedule entity, service, cont
   - `SessionService.updateStatus(Long, SessionStatus) -> SessionResponse`
   - Endpoints under `/api/v1/sessions`
 
-- [ ] **Step 1: Create `SessionStatus.java` & `Session.java`**
+- [x] **Step 1: Create `SessionStatus.java` & `Session.java`**
 
 `SessionStatus.java`:
 ```java
@@ -523,7 +523,7 @@ public class Session {
 }
 ```
 
-- [ ] **Step 2: Create `SessionRepository.java`**
+- [x] **Step 2: Create `SessionRepository.java`**
 
 ```java
 package com.smashmate.repository;
@@ -540,7 +540,7 @@ public interface SessionRepository extends JpaRepository<Session, Long> {
 }
 ```
 
-- [ ] **Step 3: Create DTOs & `SessionMapper.java`**
+- [x] **Step 3: Create DTOs & `SessionMapper.java`**
 
 `CreateSessionRequest.java`:
 ```java
@@ -635,7 +635,7 @@ public interface SessionMapper {
 }
 ```
 
-- [ ] **Step 4: Create `SessionService.java` & `SessionServiceImpl.java`**
+- [x] **Step 4: Create `SessionService.java` & `SessionServiceImpl.java`**
 
 `SessionService.java`:
 ```java
@@ -765,7 +765,7 @@ public class SessionServiceImpl implements SessionService {
 }
 ```
 
-- [ ] **Step 5: Create `SessionController.java`**
+- [x] **Step 5: Create `SessionController.java`**
 
 ```java
 package com.smashmate.controller;
@@ -839,7 +839,7 @@ public class SessionController {
 }
 ```
 
-- [ ] **Step 6: Write unit tests for SessionService**
+- [x] **Step 6: Write unit tests for SessionService**
 
 `backend/src/test/java/com/smashmate/service/SessionServiceTest.java`:
 ```java
@@ -879,12 +879,12 @@ class SessionServiceTest {
 }
 ```
 
-- [ ] **Step 7: Run backend test suite**
+- [x] **Step 7: Run backend test suite**
 
 Run: `mvn test -Dtest=SessionServiceTest`
 Expected: PASS
 
-- [ ] **Step 8: Commit Task 2**
+- [x] **Step 8: Commit Task 2**
 
 ```bash
 git add backend/
