@@ -27,3 +27,13 @@ export interface TokenResponse {
   tokenType: string;
   expiresIn: number;
 }
+
+export interface ScheduleResponse {
+  id: number;
+  dayOfWeek: number; // 1=Monday ... 7=Sunday
+  startTime: string;
+  endTime: string;
+  venueName?: string;
+  isActive: boolean;
+  createdAt: string;
+}

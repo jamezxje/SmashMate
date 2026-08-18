@@ -1553,7 +1553,7 @@ git commit -m "feat(session): implement SessionTask entity, checklist CRUD, and 
 - Consumes: `api`, `useAuthStore`
 - Produces: `/schedules` route for managing recurring badminton schedules
 
-- [ ] **Step 1: Update `frontend/src/types/index.ts`**
+- [x] **Step 1: Update `frontend/src/types/index.ts`**
 
 Add:
 ```typescript
@@ -1568,7 +1568,7 @@ export interface ScheduleResponse {
 }
 ```
 
-- [ ] **Step 2: Create `frontend/src/api/schedules.ts`**
+- [x] **Step 2: Create `frontend/src/api/schedules.ts`**
 
 ```typescript
 import { api } from './axios';
@@ -1588,7 +1588,7 @@ export const scheduleApi = {
 };
 ```
 
-- [ ] **Step 3: Create `ScheduleFormModal.tsx`**
+- [x] **Step 3: Create `ScheduleFormModal.tsx`**
 
 `frontend/src/components/schedules/ScheduleFormModal.tsx`:
 ```tsx
@@ -1729,7 +1729,7 @@ export function ScheduleFormModal({ schedule, onClose, onSaved }: Props) {
 }
 ```
 
-- [ ] **Step 4: Create `SchedulesPage.tsx`**
+- [x] **Step 4: Create `SchedulesPage.tsx`**
 
 `frontend/src/pages/SchedulesPage.tsx`:
 ```tsx
@@ -1850,7 +1850,7 @@ export function SchedulesPage() {
 }
 ```
 
-- [ ] **Step 5: Add `/schedules` route in `App.tsx`**
+- [x] **Step 5: Add `/schedules` route in `App.tsx`**
 
 ```tsx
 import { SchedulesPage } from './pages/SchedulesPage';
@@ -1858,12 +1858,12 @@ import { SchedulesPage } from './pages/SchedulesPage';
 <Route path="/schedules" element={<ProtectedRoute><SchedulesPage /></ProtectedRoute>} />
 ```
 
-- [ ] **Step 6: Build frontend to verify compilation**
+- [x] **Step 6: Build frontend to verify compilation**
 
 Run: `cd frontend && npm run build`
 Expected: PASS (0 TypeScript errors)
 
-- [ ] **Step 7: Commit Task 5**
+- [x] **Step 7: Commit Task 5**
 
 ```bash
 git add frontend/

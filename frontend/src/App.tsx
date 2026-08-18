@@ -2,6 +2,7 @@ import React from 'react';
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import { LoginPage } from './pages/LoginPage';
 import { MembersPage } from './pages/MembersPage';
+import { SchedulesPage } from './pages/SchedulesPage';
 import { useAuthStore } from './stores/useAuthStore';
 
 function ProtectedRoute({ children }: { children: React.ReactNode }) {
@@ -19,6 +20,14 @@ export function App() {
           element={
             <ProtectedRoute>
               <MembersPage />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/schedules"
+          element={
+            <ProtectedRoute>
+              <SchedulesPage />
             </ProtectedRoute>
           }
         />
