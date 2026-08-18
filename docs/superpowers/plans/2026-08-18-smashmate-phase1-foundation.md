@@ -121,7 +121,7 @@
 **Interfaces:**
 - Produces: Running Spring Boot app on port 8080; Flyway applies V1+V2 migrations on startup
 
-- [ ] **Step 1: Generate Spring Boot project**
+- [x] **Step 1: Generate Spring Boot project**
 
   ```bash
   curl https://start.spring.io/starter.zip \
@@ -138,7 +138,7 @@
   unzip backend.zip -d backend
   ```
 
-- [ ] **Step 2: Add missing dependencies to `backend/pom.xml`**
+- [x] **Step 2: Add missing dependencies to `backend/pom.xml`**
 
   Add inside `<dependencies>`:
   ```xml
@@ -196,7 +196,7 @@
   </plugin>
   ```
 
-- [ ] **Step 3: Create `backend/src/main/resources/application.yml`**
+- [x] **Step 3: Create `backend/src/main/resources/application.yml`**
 
   ```yaml
   spring:
@@ -230,7 +230,7 @@
       max-file-size-bytes: 2097152
   ```
 
-- [ ] **Step 4: Create `V1__create_initial_schema.sql`**
+- [x] **Step 4: Create `V1__create_initial_schema.sql`**
 
   Save to `backend/src/main/resources/db/migration/V1__create_initial_schema.sql`:
   ```sql
@@ -430,7 +430,7 @@
   );
   ```
 
-- [ ] **Step 5: Create `V2__seed_data.sql`**
+- [x] **Step 5: Create `V2__seed_data.sql`**
 
   Save to `backend/src/main/resources/db/migration/V2__seed_data.sql`:
   ```sql
@@ -451,7 +451,7 @@
    'ADMIN', 'ACTIVE', CURDATE());
   ```
 
-- [ ] **Step 6: Create MySQL database, run app, verify migrations**
+- [x] **Step 6: Create MySQL database, run app, verify migrations**
 
   ```sql
   CREATE DATABASE smashmate CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
