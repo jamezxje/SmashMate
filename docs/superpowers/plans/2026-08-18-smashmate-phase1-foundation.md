@@ -477,7 +477,7 @@
   - `ApiResponse.success(data)` / `ApiResponse.success(data, message)` / `ApiResponse.error(code, message)`
   - `GlobalExceptionHandler` catches `ResourceNotFoundException`, `BusinessException`, validation errors, `AccessDeniedException`, generic `Exception`
 
-- [ ] **Step 1: Create `ApiResponse.java`**
+- [x] **Step 1: Create `ApiResponse.java`**
 
   ```java
   package com.smashmate.common;
@@ -508,7 +508,7 @@
   }
   ```
 
-- [ ] **Step 2: Create exception classes**
+- [x] **Step 2: Create exception classes**
 
   `ResourceNotFoundException.java`:
   ```java
@@ -540,7 +540,7 @@
   }
   ```
 
-- [ ] **Step 3: Create `GlobalExceptionHandler.java`**
+- [x] **Step 3: Create `GlobalExceptionHandler.java`**
 
   ```java
   package com.smashmate.exception;
@@ -592,7 +592,7 @@
   }
   ```
 
-- [ ] **Step 4: Write and run smoke test**
+- [x] **Step 4: Write and run smoke test**
 
   ```java
   // backend/src/test/java/com/smashmate/exception/GlobalExceptionHandlerTest.java
