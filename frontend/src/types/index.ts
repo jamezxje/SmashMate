@@ -8,6 +8,8 @@ export interface ApiResponse<T> {
 
 export type Role = 'ADMIN' | 'MEMBER' | 'GUEST';
 export type MemberStatus = 'ACTIVE' | 'INACTIVE' | 'LEFT';
+export type SessionStatus = 'UPCOMING' | 'IN_PROGRESS' | 'CLOSED' | 'CANCELLED';
+export type RsvpStatus = 'ATTENDING' | 'ABSENT' | 'PENDING';
 
 export interface MemberResponse {
   id: number;
@@ -35,5 +37,19 @@ export interface ScheduleResponse {
   endTime: string;
   venueName?: string;
   isActive: boolean;
+  createdAt: string;
+}
+
+export interface SessionResponse {
+  id: number;
+  scheduleId?: number;
+  sessionDate: string;
+  startTime: string;
+  endTime?: string;
+  venueName?: string;
+  status: SessionStatus;
+  notes?: string;
+  createdById: number;
+  createdByName: string;
   createdAt: string;
 }

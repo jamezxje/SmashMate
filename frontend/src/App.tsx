@@ -3,6 +3,7 @@ import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import { LoginPage } from './pages/LoginPage';
 import { MembersPage } from './pages/MembersPage';
 import { SchedulesPage } from './pages/SchedulesPage';
+import { SessionsPage } from './pages/SessionsPage';
 import { useAuthStore } from './stores/useAuthStore';
 
 function ProtectedRoute({ children }: { children: React.ReactNode }) {
@@ -31,7 +32,15 @@ export function App() {
             </ProtectedRoute>
           }
         />
-        <Route path="*" element={<Navigate to="/members" replace />} />
+        <Route
+          path="/sessions"
+          element={
+            <ProtectedRoute>
+              <SessionsPage />
+            </ProtectedRoute>
+          }
+        />
+        <Route path="*" element={<Navigate to="/sessions" replace />} />
       </Routes>
     </BrowserRouter>
   );

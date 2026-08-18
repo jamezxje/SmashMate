@@ -1885,7 +1885,7 @@ git commit -m "feat(schedule): implement SchedulesPage, ScheduleFormModal, and s
 - Consumes: `api`, `useAuthStore`, `ScheduleResponse`
 - Produces: `/sessions` list route with status badges and creation modal
 
-- [ ] **Step 1: Update `frontend/src/types/index.ts`**
+- [x] **Step 1: Update `frontend/src/types/index.ts`**
 
 Add:
 ```typescript
@@ -1907,7 +1907,7 @@ export interface SessionResponse {
 }
 ```
 
-- [ ] **Step 2: Create `frontend/src/api/sessions.ts`**
+- [x] **Step 2: Create `frontend/src/api/sessions.ts`**
 
 ```typescript
 import { api } from './axios';
@@ -1931,7 +1931,7 @@ export const sessionApi = {
 };
 ```
 
-- [ ] **Step 3: Create `SessionFormModal.tsx`**
+- [x] **Step 3: Create `SessionFormModal.tsx`**
 
 `frontend/src/components/sessions/SessionFormModal.tsx`:
 ```tsx
@@ -2040,7 +2040,7 @@ export function SessionFormModal({ session, onClose, onSaved }: Props) {
 }
 ```
 
-- [ ] **Step 4: Create `SessionsPage.tsx`**
+- [x] **Step 4: Create `SessionsPage.tsx`**
 
 `frontend/src/pages/SessionsPage.tsx`:
 ```tsx
@@ -2168,7 +2168,7 @@ export function SessionsPage() {
 }
 ```
 
-- [ ] **Step 5: Add `/sessions` route to `App.tsx`**
+- [x] **Step 5: Add `/sessions` route to `App.tsx`**
 
 ```tsx
 import { SessionsPage } from './pages/SessionsPage';
@@ -2176,12 +2176,12 @@ import { SessionsPage } from './pages/SessionsPage';
 <Route path="/sessions" element={<ProtectedRoute><SessionsPage /></ProtectedRoute>} />
 ```
 
-- [ ] **Step 6: Build frontend to verify compilation**
+- [x] **Step 6: Build frontend to verify compilation**
 
 Run: `cd frontend && npm run build`
 Expected: PASS (0 TypeScript errors)
 
-- [ ] **Step 7: Commit Task 6**
+- [x] **Step 7: Commit Task 6**
 
 ```bash
 git add frontend/
