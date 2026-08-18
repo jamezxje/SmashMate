@@ -1723,7 +1723,7 @@
 - Consumes: `MemberResponse`, `Role`, `api` from Task 5
 - Produces: `/members` route with list, add member, add guest, edit, delete
 
-- [ ] **Step 1: Create `src/api/members.ts`**
+- [x] **Step 1: Create `src/api/members.ts`**
 
   ```typescript
   import { api } from './axios';
@@ -1746,7 +1746,7 @@
   };
   ```
 
-- [ ] **Step 2: Create `src/components/members/MemberFormModal.tsx`**
+- [x] **Step 2: Create `src/components/members/MemberFormModal.tsx`**
 
   ```tsx
   import { useState } from 'react';
@@ -1812,7 +1812,7 @@
   }
   ```
 
-- [ ] **Step 3: Create `src/pages/MembersPage.tsx`**
+- [x] **Step 3: Create `src/pages/MembersPage.tsx`**
 
   ```tsx
   import { useEffect, useState } from 'react';
@@ -1909,7 +1909,7 @@
   }
   ```
 
-- [ ] **Step 4: Add `/members` route to `App.tsx`**
+- [x] **Step 4: Add `/members` route to `App.tsx`**
 
   In `src/App.tsx`, add:
   ```tsx
@@ -1918,7 +1918,7 @@
   <Route path="/members" element={<ProtectedRoute><MembersPage /></ProtectedRoute>} />
   ```
 
-- [ ] **Step 5: Verify end-to-end**
+- [x] **Step 5: Verify end-to-end**
 
   Backend + frontend running. Login, navigate to http://localhost:5173/members.
   - Seeded Admin row visible

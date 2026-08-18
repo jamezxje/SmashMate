@@ -1,6 +1,7 @@
 import React from 'react';
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import { LoginPage } from './pages/LoginPage';
+import { MembersPage } from './pages/MembersPage';
 import { useAuthStore } from './stores/useAuthStore';
 
 function ProtectedRoute({ children }: { children: React.ReactNode }) {
@@ -17,13 +18,11 @@ export function App() {
           path="/members"
           element={
             <ProtectedRoute>
-              <div className="p-8 text-white">
-                <h1 className="text-2xl font-bold">Members Page (coming soon in Task 6)</h1>
-              </div>
+              <MembersPage />
             </ProtectedRoute>
           }
         />
-        <Route path="*" element={<Navigate to="/login" replace />} />
+        <Route path="*" element={<Navigate to="/members" replace />} />
       </Routes>
     </BrowserRouter>
   );
