@@ -45,7 +45,8 @@ public class Member {
     private MemberStatus status;
 
     @Column(nullable = false, precision = 12, scale = 2)
-    private BigDecimal balance;
+    @Builder.Default
+    private BigDecimal balance = BigDecimal.ZERO;
 
     @Column(name = "joined_date", nullable = false)
     private LocalDate joinedDate;

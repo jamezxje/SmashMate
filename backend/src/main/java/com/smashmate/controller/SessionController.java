@@ -2,7 +2,9 @@ package com.smashmate.controller;
 
 import com.smashmate.common.ApiResponse;
 import com.smashmate.dto.request.CreateSessionRequest;
+import com.smashmate.dto.request.UpdateRsvpRequest;
 import com.smashmate.dto.request.UpdateSessionRequest;
+import com.smashmate.dto.response.AttendeeResponse;
 import com.smashmate.dto.response.SessionResponse;
 import com.smashmate.entity.enums.SessionStatus;
 import com.smashmate.service.SessionService;
@@ -65,5 +67,35 @@ public class SessionController {
     public ResponseEntity<ApiResponse<Void>> delete(@PathVariable Long id) {
         sessionService.deleteSession(id);
         return ResponseEntity.ok(ApiResponse.success(null, "Session deleted"));
+    }
+
+    @GetMapping("/{id}/attendees")
+    public ResponseEntity<ApiResponse<List<AttendeeResponse>>> getAttendees(@PathVariable Long id) {
+        return ResponseEntity.ok(ApiResponse.success(sessionService.getAttendees(id)));
+    }
+
+    @PatchMapping("/{id}/rsvp")
+    public ResponseEntity<ApiResponse<AttendeeResponse>> updateRsvp(
+            @PathVariable Long id, @Valid @RequestBody UpdateRsvpRequest req, Principal principal) {
+        return ResponseEntity.ok(ApiResponse.success(
+                sessionService.updateRsvp(id, principal.getName(), req.getRsvpStatus()), "RSVP status updated"));
+    }
+
+    @PatchMapping("/{id}/attendees/{memberId}/checkin")
+    @PreAuthorize("hasRole('ADMIN')")
+    public ResponseEntity<ApiResponse<AttendeeResponse>> checkInMember(
+            @PathVariable Long id, @PathVariable Long memberId, @RequestBody Map<String, Boolean> body) {
+        boolean checkedIn = body.getOrDefault("checkedIn", true);
+        return ResponseEntity.ok(ApiResponse.success(
+                sessionService.checkInMember(id, memberId, checkedIn), "Check-in updated"));
+    }
+
+    @PostMapping("/{id}/attendees/guest")
+    @PreAuthorize("hasRole('ADMIN')")
+    public ResponseEntity<ApiResponse<AttendeeResponse>> addGuestAttendee(
+            @PathVariable Long id, @RequestBody Map<String, String> body) {
+        String fullName = body.get("fullName");
+        return ResponseEntity.status(HttpStatus.CREATED).body(ApiResponse.success(
+                sessionService.addGuestAttendee(id, fullName), "Guest added to session"));
     }
 }

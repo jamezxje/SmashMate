@@ -915,7 +915,7 @@ git commit -m "feat(session): implement Session entity, status lifecycle, servic
   - `SessionService.checkInMember(Long sessionId, Long memberId, boolean checkedIn) -> AttendeeResponse`
   - Endpoints under `/api/v1/sessions/{id}/attendees` and `/api/v1/sessions/{id}/rsvp`
 
-- [ ] **Step 1: Create `RsvpStatus.java` & `SessionAttendee.java`**
+- [x] **Step 1: Create `RsvpStatus.java` & `SessionAttendee.java`**
 
 `RsvpStatus.java`:
 ```java
@@ -982,7 +982,7 @@ public class SessionAttendee {
 }
 ```
 
-- [ ] **Step 2: Create `SessionAttendeeRepository.java`**
+- [x] **Step 2: Create `SessionAttendeeRepository.java`**
 
 ```java
 package com.smashmate.repository;
@@ -998,7 +998,7 @@ public interface SessionAttendeeRepository extends JpaRepository<SessionAttendee
 }
 ```
 
-- [ ] **Step 3: Create DTOs & `AttendeeMapper.java`**
+- [x] **Step 3: Create DTOs & `AttendeeMapper.java`**
 
 `UpdateRsvpRequest.java`:
 ```java
@@ -1063,7 +1063,7 @@ public interface AttendeeMapper {
 }
 ```
 
-- [ ] **Step 4: Update `SessionService.java` & `SessionServiceImpl.java`**
+- [x] **Step 4: Update `SessionService.java` & `SessionServiceImpl.java`**
 
 Add to `SessionService.java`:
 ```java
@@ -1139,7 +1139,7 @@ public AttendeeResponse addGuestAttendee(Long sessionId, String fullName) {
 }
 ```
 
-- [ ] **Step 5: Add endpoints to `SessionController.java`**
+- [x] **Step 5: Add endpoints to `SessionController.java`**
 
 ```java
 @GetMapping("/{id}/attendees")
@@ -1173,7 +1173,7 @@ public ResponseEntity<ApiResponse<AttendeeResponse>> addGuestAttendee(
 }
 ```
 
-- [ ] **Step 6: Write unit tests for Attendance & RSVP**
+- [x] **Step 6: Write unit tests for Attendance & RSVP**
 
 `backend/src/test/java/com/smashmate/service/SessionAttendeeTest.java`:
 ```java
@@ -1214,12 +1214,12 @@ class SessionAttendeeTest {
 }
 ```
 
-- [ ] **Step 7: Run backend test suite**
+- [x] **Step 7: Run backend test suite**
 
 Run: `mvn test -Dtest=SessionAttendeeTest`
 Expected: PASS
 
-- [ ] **Step 8: Commit Task 3**
+- [x] **Step 8: Commit Task 3**
 
 ```bash
 git add backend/
