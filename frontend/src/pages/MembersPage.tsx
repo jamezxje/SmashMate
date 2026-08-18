@@ -102,7 +102,19 @@ export function MembersPage() {
             </div>
           </div>
 
-          <div className="flex items-center gap-4">
+          <div className="flex items-center gap-3">
+            <button
+              onClick={() => navigate('/sessions')}
+              className="flex items-center gap-1 text-xs text-slate-300 hover:text-white px-3 py-1.5 rounded-lg bg-slate-700 font-medium"
+            >
+              Buổi sinh hoạt
+            </button>
+            <button
+              onClick={() => navigate('/schedules')}
+              className="flex items-center gap-1 text-xs text-slate-300 hover:text-white px-3 py-1.5 rounded-lg bg-slate-700 font-medium"
+            >
+              Lịch tập
+            </button>
             <span className="text-xs font-semibold px-2.5 py-1 rounded-full bg-slate-700 text-slate-300 border border-slate-600">
               Role: <strong className="text-emerald-400">{userRole}</strong>
             </span>
