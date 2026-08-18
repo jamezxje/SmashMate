@@ -62,7 +62,7 @@
   - `ScheduleService.deleteSchedule(Long)`
   - Endpoints under `/api/v1/schedules`
 
-- [ ] **Step 1: Create `RecurringSchedule.java` entity**
+- [x] **Step 1: Create `RecurringSchedule.java` entity**
 
 ```java
 package com.smashmate.entity;
@@ -88,7 +88,7 @@ public class RecurringSchedule {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "day_of_week", nullable = false)
+    @Column(name = "day_of_week", nullable = false, columnDefinition = "TINYINT")
     private Integer dayOfWeek;
 
     @Column(name = "start_time", nullable = false)
@@ -114,7 +114,7 @@ public class RecurringSchedule {
 }
 ```
 
-- [ ] **Step 2: Create `RecurringScheduleRepository.java`**
+- [x] **Step 2: Create `RecurringScheduleRepository.java`**
 
 ```java
 package com.smashmate.repository;
@@ -128,7 +128,7 @@ public interface RecurringScheduleRepository extends JpaRepository<RecurringSche
 }
 ```
 
-- [ ] **Step 3: Create DTOs & `ScheduleMapper.java`**
+- [x] **Step 3: Create DTOs & `ScheduleMapper.java`**
 
 `CreateScheduleRequest.java`:
 ```java
@@ -209,7 +209,7 @@ public interface ScheduleMapper {
 }
 ```
 
-- [ ] **Step 4: Create `ScheduleService.java` & `ScheduleServiceImpl.java`**
+- [x] **Step 4: Create `ScheduleService.java` & `ScheduleServiceImpl.java`**
 
 `ScheduleService.java`:
 ```java
@@ -306,7 +306,7 @@ public class ScheduleServiceImpl implements ScheduleService {
 }
 ```
 
-- [ ] **Step 5: Create `ScheduleController.java`**
+- [x] **Step 5: Create `ScheduleController.java`**
 
 ```java
 package com.smashmate.controller;
@@ -366,7 +366,7 @@ public class ScheduleController {
 }
 ```
 
-- [ ] **Step 6: Write unit tests for ScheduleService**
+- [x] **Step 6: Write unit tests for ScheduleService**
 
 `backend/src/test/java/com/smashmate/service/ScheduleServiceTest.java`:
 ```java
@@ -405,12 +405,12 @@ class ScheduleServiceTest {
 }
 ```
 
-- [ ] **Step 7: Run backend test suite**
+- [x] **Step 7: Run backend test suite**
 
 Run: `mvn test -Dtest=ScheduleServiceTest`
 Expected: PASS
 
-- [ ] **Step 8: Commit Task 1**
+- [x] **Step 8: Commit Task 1**
 
 ```bash
 git add backend/
