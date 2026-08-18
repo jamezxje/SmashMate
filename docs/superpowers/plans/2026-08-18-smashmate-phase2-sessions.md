@@ -2239,6 +2239,8 @@ updateRsvp: (sessionId: number, rsvpStatus: RsvpStatus) =>
   api.patch<ApiResponse<SessionAttendeeResponse>>(`/sessions/${sessionId}/rsvp`, { rsvpStatus }),
 checkInMember: (sessionId: number, memberId: number, checkedIn: boolean) =>
   api.patch<ApiResponse<SessionAttendeeResponse>>(`/sessions/${sessionId}/attendees/${memberId}/checkin`, { checkedIn }),
+addGuestAttendee: (sessionId: number, fullName: string) =>
+  api.post<ApiResponse<SessionAttendeeResponse>>(`/sessions/${sessionId}/attendees/guest`, { fullName }),
 
 getTasks: (sessionId: number) =>
   api.get<ApiResponse<SessionTaskResponse[]>>(`/sessions/${sessionId}/tasks`),
@@ -2259,7 +2261,7 @@ import { useParams, useNavigate } from 'react-router-dom';
 import { sessionApi } from '../api/sessions';
 import type { SessionResponse, SessionAttendeeResponse, SessionTaskResponse, RsvpStatus } from '../types';
 import { useAuthStore } from '../stores/useAuthStore';
-import { ArrowLeft, Calendar, Clock, MapPin, CheckCircle, XCircle, HelpCircle, CheckSquare, Plus, Trash2 } from 'lucide-react';
+import { ArrowLeft, Calendar, Clock, MapPin, CheckCircle, XCircle, HelpCircle, CheckSquare, Plus, Trash2, UserPlus } from 'lucide-react';
 
 export function SessionDetailPage() {
   const { id } = useParams();
@@ -2302,6 +2304,14 @@ export function SessionDetailPage() {
   async function handleCheckIn(memberId: number, current: boolean) {
     await sessionApi.checkInMember(sessionId, memberId, !current);
     loadData();
+  }
+
+  async function handleAddGuestAttendee() {
+    const name = prompt('Nhập tên khách vãng lai tham gia buổi tập:');
+    if (name?.trim()) {
+      await sessionApi.addGuestAttendee(sessionId, name.trim());
+      loadData();
+    }
   }
 
   async function handleCreateTask(e: React.FormEvent) {
@@ -2360,14 +2370,27 @@ export function SessionDetailPage() {
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           {/* Attendees List */}
           <div className="bg-slate-800 border border-slate-700/80 rounded-2xl p-5 shadow-xl">
-            <h3 className="text-base font-bold text-white mb-4 flex items-center justify-between">
-              <span>Danh sách tham gia ({attendees.length})</span>
-            </h3>
+            <div className="flex items-center justify-between mb-4">
+              <h3 className="text-base font-bold text-white">Danh sách tham gia ({attendees.length})</h3>
+              {isAdmin && (
+                <button
+                  onClick={handleAddGuestAttendee}
+                  className="flex items-center gap-1 bg-amber-500/10 hover:bg-amber-500/20 text-amber-400 border border-amber-500/30 font-bold px-3 py-1.5 rounded-xl text-xs transition-colors"
+                >
+                  <UserPlus className="w-3.5 h-3.5" /> + Khách vãng lai
+                </button>
+              )}
+            </div>
             <div className="space-y-2.5 max-h-96 overflow-y-auto pr-1">
               {attendees.map((a) => (
                 <div key={a.id} className="flex items-center justify-between bg-slate-900/60 border border-slate-700/50 p-3 rounded-xl">
                   <div>
-                    <p className="text-xs font-semibold text-white">{a.memberName}</p>
+                    <div className="flex items-center gap-2">
+                      <p className="text-xs font-semibold text-white">{a.memberName}</p>
+                      {a.memberRole === 'GUEST' && (
+                        <span className="text-[10px] font-bold px-1.5 py-0.2 bg-amber-500/10 text-amber-400 border border-amber-500/20 rounded">GUEST</span>
+                      )}
+                    </div>
                     <span className={`text-[10px] font-bold ${a.rsvpStatus === 'ATTENDING' ? 'text-emerald-400' : 'text-rose-400'}`}>
                       RSVP: {a.rsvpStatus}
                     </span>
