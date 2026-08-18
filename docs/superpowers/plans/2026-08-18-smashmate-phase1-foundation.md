@@ -995,7 +995,7 @@
   - `MemberService.changePassword(String email, ChangePasswordRequest)`
   - All CRUD endpoints under `/api/v1/members`
 
-- [ ] **Step 1: Create enum classes**
+- [x] **Step 1: Create enum classes**
 
   ```java
   // com/smashmate/entity/enums/Role.java
@@ -1009,7 +1009,7 @@
   public enum MemberStatus { ACTIVE, INACTIVE, LEFT }
   ```
 
-- [ ] **Step 2: Create `Member.java` entity**
+- [x] **Step 2: Create `Member.java` entity**
 
   ```java
   package com.smashmate.entity;
@@ -1038,7 +1038,7 @@
   }
   ```
 
-- [ ] **Step 3: Create `MemberRepository.java`**
+- [x] **Step 3: Create `MemberRepository.java`**
 
   ```java
   package com.smashmate.repository;
@@ -1055,7 +1055,7 @@
   }
   ```
 
-- [ ] **Step 4: Create DTO classes**
+- [x] **Step 4: Create DTO classes**
 
   `CreateMemberRequest.java`:
   ```java
@@ -1125,7 +1125,7 @@
   }
   ```
 
-- [ ] **Step 5: Create `MemberMapper.java`**
+- [x] **Step 5: Create `MemberMapper.java`**
 
   ```java
   package com.smashmate.mapper;
@@ -1141,7 +1141,7 @@
   }
   ```
 
-- [ ] **Step 6: Create `MemberService.java`**
+- [x] **Step 6: Create `MemberService.java`**
 
   ```java
   package com.smashmate.service;
@@ -1255,7 +1255,7 @@
   }
   ```
 
-- [ ] **Step 7: Create `MemberController.java`**
+- [x] **Step 7: Create `MemberController.java`**
 
   ```java
   package com.smashmate.controller;
@@ -1331,7 +1331,7 @@
   }
   ```
 
-- [ ] **Step 8: Write and run service tests**
+- [x] **Step 8: Write and run service tests**
 
   ```java
   // backend/src/test/java/com/smashmate/service/MemberServiceTest.java
@@ -1387,7 +1387,7 @@
   Run: `./mvnw test -pl backend -Dtest=MemberServiceTest`
   Expected: PASS
 
-- [ ] **Step 9: Write and run controller integration tests**
+- [x] **Step 9: Write and run controller integration tests**
 
   ```java
   // backend/src/test/java/com/smashmate/controller/MemberControllerTest.java
