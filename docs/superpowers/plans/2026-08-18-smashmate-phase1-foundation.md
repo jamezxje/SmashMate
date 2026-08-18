@@ -636,7 +636,7 @@
   - `POST /api/v1/auth/login -> ApiResponse<TokenResponse>`
   - `POST /api/v1/auth/refresh -> ApiResponse<TokenResponse>`
 
-- [ ] **Step 1: Create `JwtProperties.java`**
+- [x] **Step 1: Create `JwtProperties.java`**
 
   ```java
   package com.smashmate.security;
@@ -653,7 +653,7 @@
   }
   ```
 
-- [ ] **Step 2: Create `JwtService.java`**
+- [x] **Step 2: Create `JwtService.java`**
 
   ```java
   package com.smashmate.security;
@@ -694,7 +694,7 @@
   }
   ```
 
-- [ ] **Step 3: Write and run unit test for JwtService**
+- [x] **Step 3: Write and run unit test for JwtService**
 
   ```java
   // backend/src/test/java/com/smashmate/security/JwtServiceTest.java
@@ -714,7 +714,7 @@
   Run: `./mvnw test -pl backend -Dtest=JwtServiceTest`
   Expected: PASS
 
-- [ ] **Step 4: Create `UserDetailsServiceImpl.java`**
+- [x] **Step 4: Create `UserDetailsServiceImpl.java`**
 
   > Note: This file references `MemberRepository` which is created in Task 4. Create both tasks in the same session, or stub `MemberRepository` as an interface first.
 
@@ -744,7 +744,7 @@
   }
   ```
 
-- [ ] **Step 5: Create `JwtAuthFilter.java`**
+- [x] **Step 5: Create `JwtAuthFilter.java`**
 
   ```java
   package com.smashmate.security;
@@ -783,7 +783,7 @@
   }
   ```
 
-- [ ] **Step 6: Create `SecurityConfig.java`**
+- [x] **Step 6: Create `SecurityConfig.java`**
 
   ```java
   package com.smashmate.config;
@@ -841,7 +841,7 @@
   }
   ```
 
-- [ ] **Step 7: Create `LoginRequest.java`, `TokenResponse.java`, and `AuthController.java`**
+- [x] **Step 7: Create `LoginRequest.java`, `TokenResponse.java`, and `AuthController.java`**
 
   `LoginRequest.java`:
   ```java
@@ -933,7 +933,7 @@
   }
   ```
 
-- [ ] **Step 8: Write and run integration test for login**
+- [x] **Step 8: Write and run integration test for login**
 
   ```java
   // backend/src/test/java/com/smashmate/controller/AuthControllerTest.java
