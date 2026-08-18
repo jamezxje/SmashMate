@@ -2,10 +2,13 @@ package com.smashmate.controller;
 
 import com.smashmate.common.ApiResponse;
 import com.smashmate.dto.request.CreateSessionRequest;
+import com.smashmate.dto.request.CreateTaskRequest;
 import com.smashmate.dto.request.UpdateRsvpRequest;
 import com.smashmate.dto.request.UpdateSessionRequest;
+import com.smashmate.dto.request.UpdateTaskRequest;
 import com.smashmate.dto.response.AttendeeResponse;
 import com.smashmate.dto.response.SessionResponse;
+import com.smashmate.dto.response.TaskResponse;
 import com.smashmate.entity.enums.SessionStatus;
 import com.smashmate.service.SessionService;
 import jakarta.validation.Valid;
@@ -97,5 +100,32 @@ public class SessionController {
         String fullName = body.get("fullName");
         return ResponseEntity.status(HttpStatus.CREATED).body(ApiResponse.success(
                 sessionService.addGuestAttendee(id, fullName), "Guest added to session"));
+    }
+
+    @GetMapping("/{id}/tasks")
+    public ResponseEntity<ApiResponse<List<TaskResponse>>> getTasks(@PathVariable Long id) {
+        return ResponseEntity.ok(ApiResponse.success(sessionService.getTasks(id)));
+    }
+
+    @PostMapping("/{id}/tasks")
+    @PreAuthorize("hasRole('ADMIN')")
+    public ResponseEntity<ApiResponse<TaskResponse>> createTask(
+            @PathVariable Long id, @Valid @RequestBody CreateTaskRequest req) {
+        return ResponseEntity.status(HttpStatus.CREATED)
+                .body(ApiResponse.success(sessionService.createTask(id, req), "Task created"));
+    }
+
+    @PatchMapping("/{id}/tasks/{taskId}")
+    @PreAuthorize("hasRole('ADMIN')")
+    public ResponseEntity<ApiResponse<TaskResponse>> updateTask(
+            @PathVariable Long id, @PathVariable Long taskId, @RequestBody UpdateTaskRequest req) {
+        return ResponseEntity.ok(ApiResponse.success(sessionService.updateTask(taskId, req), "Task updated"));
+    }
+
+    @DeleteMapping("/{id}/tasks/{taskId}")
+    @PreAuthorize("hasRole('ADMIN')")
+    public ResponseEntity<ApiResponse<Void>> deleteTask(@PathVariable Long id, @PathVariable Long taskId) {
+        sessionService.deleteTask(taskId);
+        return ResponseEntity.ok(ApiResponse.success(null, "Task deleted"));
     }
 }

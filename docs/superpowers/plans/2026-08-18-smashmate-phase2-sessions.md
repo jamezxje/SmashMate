@@ -1251,7 +1251,7 @@ git commit -m "feat(session): implement SessionAttendee entity, RSVP, and check-
   - `SessionService.deleteTask(Long taskId)`
   - Endpoints under `/api/v1/sessions/{id}/tasks`
 
-- [ ] **Step 1: Create `SessionTask.java` entity**
+- [x] **Step 1: Create `SessionTask.java` entity**
 
 ```java
 package com.smashmate.entity;
@@ -1301,7 +1301,7 @@ public class SessionTask {
 }
 ```
 
-- [ ] **Step 2: Create `SessionTaskRepository.java`**
+- [x] **Step 2: Create `SessionTaskRepository.java`**
 
 ```java
 package com.smashmate.repository;
@@ -1315,7 +1315,7 @@ public interface SessionTaskRepository extends JpaRepository<SessionTask, Long> 
 }
 ```
 
-- [ ] **Step 3: Create DTOs & `TaskMapper.java`**
+- [x] **Step 3: Create DTOs & `TaskMapper.java`**
 
 `CreateTaskRequest.java`:
 ```java
@@ -1389,7 +1389,7 @@ public interface TaskMapper {
 }
 ```
 
-- [ ] **Step 4: Update `SessionService.java` & `SessionServiceImpl.java`**
+- [x] **Step 4: Update `SessionService.java` & `SessionServiceImpl.java`**
 
 Add to `SessionService.java`:
 ```java
@@ -1449,7 +1449,7 @@ public void deleteTask(Long taskId) {
 }
 ```
 
-- [ ] **Step 5: Add endpoints to `SessionController.java`**
+- [x] **Step 5: Add endpoints to `SessionController.java`**
 
 ```java
 @GetMapping("/{id}/tasks")
@@ -1480,7 +1480,7 @@ public ResponseEntity<ApiResponse<Void>> deleteTask(@PathVariable Long id, @Path
 }
 ```
 
-- [ ] **Step 6: Write unit tests for Session Tasks**
+- [x] **Step 6: Write unit tests for Session Tasks**
 
 `backend/src/test/java/com/smashmate/service/SessionTaskTest.java`:
 ```java
@@ -1526,12 +1526,12 @@ class SessionTaskTest {
 }
 ```
 
-- [ ] **Step 7: Run backend test suite**
+- [x] **Step 7: Run backend test suite**
 
 Run: `mvn test`
 Expected: BUILD SUCCESS (All 15+ tests pass)
 
-- [ ] **Step 8: Commit Task 4**
+- [x] **Step 8: Commit Task 4**
 
 ```bash
 git add backend/

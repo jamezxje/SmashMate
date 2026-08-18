@@ -1,12 +1,16 @@
 package com.smashmate.service.impl;
 
 import com.smashmate.dto.request.CreateSessionRequest;
+import com.smashmate.dto.request.CreateTaskRequest;
 import com.smashmate.dto.request.UpdateSessionRequest;
+import com.smashmate.dto.request.UpdateTaskRequest;
 import com.smashmate.dto.response.AttendeeResponse;
 import com.smashmate.dto.response.SessionResponse;
+import com.smashmate.dto.response.TaskResponse;
 import com.smashmate.entity.Member;
 import com.smashmate.entity.Session;
 import com.smashmate.entity.SessionAttendee;
+import com.smashmate.entity.SessionTask;
 import com.smashmate.entity.enums.MemberStatus;
 import com.smashmate.entity.enums.Role;
 import com.smashmate.entity.enums.RsvpStatus;
@@ -14,10 +18,12 @@ import com.smashmate.entity.enums.SessionStatus;
 import com.smashmate.exception.ResourceNotFoundException;
 import com.smashmate.mapper.AttendeeMapper;
 import com.smashmate.mapper.SessionMapper;
+import com.smashmate.mapper.TaskMapper;
 import com.smashmate.repository.MemberRepository;
 import com.smashmate.repository.RecurringScheduleRepository;
 import com.smashmate.repository.SessionAttendeeRepository;
 import com.smashmate.repository.SessionRepository;
+import com.smashmate.repository.SessionTaskRepository;
 import com.smashmate.service.SessionService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -36,8 +42,10 @@ public class SessionServiceImpl implements SessionService {
     private final MemberRepository memberRepository;
     private final RecurringScheduleRepository scheduleRepository;
     private final SessionAttendeeRepository attendeeRepository;
+    private final SessionTaskRepository taskRepository;
     private final SessionMapper sessionMapper;
     private final AttendeeMapper attendeeMapper;
+    private final TaskMapper taskMapper;
 
     @Override
     @Transactional(readOnly = true)
@@ -168,6 +176,53 @@ public class SessionServiceImpl implements SessionService {
                 .checkedIn(true)
                 .build();
         return attendeeMapper.toResponse(attendeeRepository.save(attendee));
+    }
+
+    @Override
+    @Transactional(readOnly = true)
+    public List<TaskResponse> getTasks(Long sessionId) {
+        return taskRepository.findAllBySessionId(sessionId).stream()
+                .map(taskMapper::toResponse)
+                .toList();
+    }
+
+    @Override
+    public TaskResponse createTask(Long sessionId, CreateTaskRequest req) {
+        var session = findById(sessionId);
+        var assignedMember = req.getAssignedToId() != null
+                ? memberRepository.findById(req.getAssignedToId()).orElse(null)
+                : null;
+
+        var task = SessionTask.builder()
+                .session(session)
+                .title(req.getTitle())
+                .assignedTo(assignedMember)
+                .isDone(false)
+                .build();
+
+        return taskMapper.toResponse(taskRepository.save(task));
+    }
+
+    @Override
+    public TaskResponse updateTask(Long taskId, UpdateTaskRequest req) {
+        var task = taskRepository.findById(taskId)
+                .orElseThrow(() -> new ResourceNotFoundException("SessionTask", taskId));
+
+        if (req.getTitle() != null) task.setTitle(req.getTitle());
+        if (req.getIsDone() != null) task.setIsDone(req.getIsDone());
+        if (req.getAssignedToId() != null) {
+            var member = memberRepository.findById(req.getAssignedToId()).orElse(null);
+            task.setAssignedTo(member);
+        }
+
+        return taskMapper.toResponse(taskRepository.save(task));
+    }
+
+    @Override
+    public void deleteTask(Long taskId) {
+        var task = taskRepository.findById(taskId)
+                .orElseThrow(() -> new ResourceNotFoundException("SessionTask", taskId));
+        taskRepository.delete(task);
     }
 
     private Session findById(Long id) {
