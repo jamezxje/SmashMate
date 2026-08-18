@@ -1,5 +1,5 @@
 import { api } from './axios';
-import type { ApiResponse, SessionResponse, SessionStatus } from '../types';
+import type { ApiResponse, SessionResponse, SessionStatus, SessionAttendeeResponse, SessionTaskResponse, RsvpStatus } from '../types';
 
 export const sessionApi = {
   getAll: (status?: SessionStatus, month?: number, year?: number) =>
@@ -16,4 +16,22 @@ export const sessionApi = {
     api.patch<ApiResponse<SessionResponse>>(`/sessions/${id}/status`, { status }),
   delete: (id: number) =>
     api.delete<ApiResponse<void>>(`/sessions/${id}`),
+
+  getAttendees: (sessionId: number) =>
+    api.get<ApiResponse<SessionAttendeeResponse[]>>(`/sessions/${sessionId}/attendees`),
+  updateRsvp: (sessionId: number, rsvpStatus: RsvpStatus) =>
+    api.patch<ApiResponse<SessionAttendeeResponse>>(`/sessions/${sessionId}/rsvp`, { rsvpStatus }),
+  checkInMember: (sessionId: number, memberId: number, checkedIn: boolean) =>
+    api.patch<ApiResponse<SessionAttendeeResponse>>(`/sessions/${sessionId}/attendees/${memberId}/checkin`, { checkedIn }),
+  addGuestAttendee: (sessionId: number, fullName: string) =>
+    api.post<ApiResponse<SessionAttendeeResponse>>(`/sessions/${sessionId}/attendees/guest`, { fullName }),
+
+  getTasks: (sessionId: number) =>
+    api.get<ApiResponse<SessionTaskResponse[]>>(`/sessions/${sessionId}/tasks`),
+  createTask: (sessionId: number, title: string, assignedToId?: number) =>
+    api.post<ApiResponse<SessionTaskResponse>>(`/sessions/${sessionId}/tasks`, { title, assignedToId }),
+  updateTask: (sessionId: number, taskId: number, isDone: boolean) =>
+    api.patch<ApiResponse<SessionTaskResponse>>(`/sessions/${sessionId}/tasks/${taskId}`, { isDone }),
+  deleteTask: (sessionId: number, taskId: number) =>
+    api.delete<ApiResponse<void>>(`/sessions/${sessionId}/tasks/${taskId}`),
 };

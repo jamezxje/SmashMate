@@ -4,6 +4,7 @@ import { LoginPage } from './pages/LoginPage';
 import { MembersPage } from './pages/MembersPage';
 import { SchedulesPage } from './pages/SchedulesPage';
 import { SessionsPage } from './pages/SessionsPage';
+import { SessionDetailPage } from './pages/SessionDetailPage';
 import { useAuthStore } from './stores/useAuthStore';
 
 function ProtectedRoute({ children }: { children: React.ReactNode }) {
@@ -37,6 +38,14 @@ export function App() {
           element={
             <ProtectedRoute>
               <SessionsPage />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/sessions/:id"
+          element={
+            <ProtectedRoute>
+              <SessionDetailPage />
             </ProtectedRoute>
           }
         />

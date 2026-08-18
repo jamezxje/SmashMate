@@ -2202,7 +2202,7 @@ git commit -m "feat(session): implement SessionsPage, SessionFormModal, and sess
 - Consumes: `sessionApi`, `AttendeeResponse`, `TaskResponse`
 - Produces: `/sessions/:id` detail route with RSVP buttons, Check-in toggle, and Session Task checklist
 
-- [ ] **Step 1: Update `frontend/src/types/index.ts`**
+- [x] **Step 1: Update `frontend/src/types/index.ts`**
 
 Add:
 ```typescript
@@ -2229,7 +2229,7 @@ export interface SessionTaskResponse {
 }
 ```
 
-- [ ] **Step 2: Add Attendee & Task API methods to `frontend/src/api/sessions.ts`**
+- [x] **Step 2: Add Attendee & Task API methods to `frontend/src/api/sessions.ts`**
 
 Add:
 ```typescript
@@ -2252,7 +2252,7 @@ deleteTask: (sessionId: number, taskId: number) =>
   api.delete<ApiResponse<void>>(`/sessions/${sessionId}/tasks/${taskId}`),
 ```
 
-- [ ] **Step 3: Create `SessionDetailPage.tsx`**
+- [x] **Step 3: Create `SessionDetailPage.tsx`**
 
 `frontend/src/pages/SessionDetailPage.tsx`:
 ```tsx
@@ -2454,7 +2454,7 @@ export function SessionDetailPage() {
 }
 ```
 
-- [ ] **Step 4: Add `/sessions/:id` route to `App.tsx`**
+- [x] **Step 4: Add `/sessions/:id` route to `App.tsx`**
 
 ```tsx
 import { SessionDetailPage } from './pages/SessionDetailPage';
@@ -2462,17 +2462,12 @@ import { SessionDetailPage } from './pages/SessionDetailPage';
 <Route path="/sessions/:id" element={<ProtectedRoute><SessionDetailPage /></ProtectedRoute>} />
 ```
 
-- [ ] **Step 5: Build frontend to verify compilation**
+- [x] **Step 5: Build frontend to verify compilation**
 
 Run: `cd frontend && npm run build`
 Expected: PASS (0 TypeScript errors)
 
-- [ ] **Step 6: Commit Task 7**
-
-```bash
-git add frontend/
-git commit -m "feat(session): implement SessionDetailPage with RSVP buttons, check-in controls, and task checklist"
-```
+- [x] **Step 6: Commit Task 7**
 
 ---
 

@@ -53,3 +53,25 @@ export interface SessionResponse {
   createdByName: string;
   createdAt: string;
 }
+
+export interface SessionAttendeeResponse {
+  id: number;
+  sessionId: number;
+  memberId: number;
+  memberName: string;
+  memberPhone?: string;
+  memberRole: Role;
+  memberStatus: MemberStatus;
+  rsvpStatus: RsvpStatus;
+  checkedIn: boolean;
+}
+
+export interface SessionTaskResponse {
+  id: number;
+  sessionId: number;
+  title: string;
+  assignedToId?: number;
+  assignedToName?: string;
+  isDone: boolean;
+  createdAt: string;
+}
