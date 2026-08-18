@@ -1070,6 +1070,7 @@ Add to `SessionService.java`:
 List<AttendeeResponse> getAttendees(Long sessionId);
 AttendeeResponse updateRsvp(Long sessionId, String userEmail, RsvpStatus rsvpStatus);
 AttendeeResponse checkInMember(Long sessionId, Long memberId, boolean checkedIn);
+AttendeeResponse addGuestAttendee(Long sessionId, String fullName);
 ```
 
 Implement in `SessionServiceImpl.java`:
@@ -1114,6 +1115,28 @@ public AttendeeResponse checkInMember(Long sessionId, Long memberId, boolean che
     attendee.setCheckedIn(checkedIn);
     return attendeeMapper.toResponse(attendeeRepository.save(attendee));
 }
+
+@Override
+public AttendeeResponse addGuestAttendee(Long sessionId, String fullName) {
+    var session = findById(sessionId);
+    var guest = Member.builder()
+        .fullName(fullName)
+        .role(Role.GUEST)
+        .status(MemberStatus.ACTIVE)
+        .email(null)
+        .password(null)
+        .joinedDate(LocalDate.now())
+        .build();
+    var savedGuest = memberRepository.save(guest);
+
+    var attendee = SessionAttendee.builder()
+        .session(session)
+        .member(savedGuest)
+        .rsvpStatus(RsvpStatus.ATTENDING)
+        .checkedIn(true)
+        .build();
+    return attendeeMapper.toResponse(attendeeRepository.save(attendee));
+}
 ```
 
 - [ ] **Step 5: Add endpoints to `SessionController.java`**
@@ -1138,6 +1161,15 @@ public ResponseEntity<ApiResponse<AttendeeResponse>> checkInMember(
     boolean checkedIn = body.getOrDefault("checkedIn", true);
     return ResponseEntity.ok(ApiResponse.success(
         sessionService.checkInMember(id, memberId, checkedIn), "Check-in updated"));
+}
+
+@PostMapping("/{id}/attendees/guest")
+@PreAuthorize("hasRole('ADMIN')")
+public ResponseEntity<ApiResponse<AttendeeResponse>> addGuestAttendee(
+        @PathVariable Long id, @RequestBody Map<String, String> body) {
+    String fullName = body.get("fullName");
+    return ResponseEntity.status(HttpStatus.CREATED).body(ApiResponse.success(
+        sessionService.addGuestAttendee(id, fullName), "Guest added to session"));
 }
 ```
 
