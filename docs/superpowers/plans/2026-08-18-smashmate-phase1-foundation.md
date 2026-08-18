@@ -1457,7 +1457,7 @@
 **Interfaces:**
 - Produces: React app on port 5173; login POSTs to `/api/v1/auth/login`; JWT in Zustand store; refresh token interceptor on 401
 
-- [ ] **Step 1: Scaffold Vite + React + Tailwind**
+- [x] **Step 1: Scaffold Vite + React + Tailwind**
 
   ```bash
   npm create vite@latest frontend -- --template react-ts
@@ -1484,7 +1484,7 @@
   @tailwind utilities;
   ```
 
-- [ ] **Step 2: Create `src/types/index.ts`**
+- [x] **Step 2: Create `src/types/index.ts`**
 
   ```typescript
   export interface ApiResponse<T> {
@@ -1518,7 +1518,7 @@
   }
   ```
 
-- [ ] **Step 3: Create `src/stores/useAuthStore.ts`**
+- [x] **Step 3: Create `src/stores/useAuthStore.ts`**
 
   ```typescript
   import { create } from 'zustand';
@@ -1549,7 +1549,7 @@
   }));
   ```
 
-- [ ] **Step 4: Create `src/api/axios.ts`**
+- [x] **Step 4: Create `src/api/axios.ts`**
 
   ```typescript
   import axios from 'axios';
@@ -1586,7 +1586,7 @@
   );
   ```
 
-- [ ] **Step 5: Create `src/api/auth.ts`**
+- [x] **Step 5: Create `src/api/auth.ts`**
 
   ```typescript
   import { api } from './axios';
@@ -1602,7 +1602,7 @@
   };
   ```
 
-- [ ] **Step 6: Create `src/pages/LoginPage.tsx`**
+- [x] **Step 6: Create `src/pages/LoginPage.tsx`**
 
   ```tsx
   import { useState } from 'react';
@@ -1663,7 +1663,7 @@
   }
   ```
 
-- [ ] **Step 7: Create `src/App.tsx`**
+- [x] **Step 7: Create `src/App.tsx`**
 
   ```tsx
   import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
@@ -1701,7 +1701,7 @@
   ReactDOM.createRoot(document.getElementById('root')!).render(<React.StrictMode><App /></React.StrictMode>);
   ```
 
-- [ ] **Step 8: Verify end-to-end**
+- [x] **Step 8: Verify end-to-end**
 
   ```bash
   cd frontend && npm run dev
